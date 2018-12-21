@@ -1,0 +1,3 @@
+graft djangocms_flexslider/static
+graft djangocms_flexslider/templates
+graft djangocms_flexslider/templatetags

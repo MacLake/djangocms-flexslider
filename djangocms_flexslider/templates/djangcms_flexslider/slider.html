@@ -1,0 +1,50 @@
+{% load staticfiles cms_tags sekizai_tags djangocms_flexslider %}
+{% addtoblock "css" strip %}
+<link rel="stylesheet" type="text/css" href="{% static 'djangocms_flexslider/flexslider/flexslider.css' %}">
+{% endaddtoblock %}
+{% addtoblock "css" strip %}
+<style type="text/css">
+	.flex-caption {
+		width: 100%;
+		padding: 2%;
+		left: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, .5);
+		color: #fff;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, .3);
+		font-size: 14px;
+		line-height: 18px;
+	}
+	{% if instance.width %}
+	.flexslider {
+		width: {{  instance.width }}{{ instance.unit }} !important;
+	}
+	{% endif %}
+</style>
+{% endaddtoblock %}
+
+<div id="flexslider-{{ instance.id }}" class="flexslider">
+	<ul class="slides">
+		{% for plugin in instance.child_plugin_instances %}
+		{% render_plugin plugin %}
+		{% endfor %}
+	</ul>
+</div>
+
+{% addtoblock "js" strip %}
+<script defer src="{% static 'djangocms_flexslider/flexslider/jquery.flexslider-min.js' %}"></script>
+{% endaddtoblock %}
+{% addtoblock "js" strip %}
+<script>
+    $(document).ready(function () {
+        $('#flexslider-{{ instance.id }}').flexslider({
+            animation: '{{ instance.animation }}',
+	        slideshowSpeed: {{ instance.slideshow_speed }},
+			randomize: {{ instance.randomize|bool_js }},
+			controlNav: {{ instance.control_nav|bool_js }},
+			pauseOnAction: {{ instance.pause_on_action|bool_js }},
+			pauseOnHover: {{ instance.pause_on_hover|bool_js }},
+        });
+    });
+</script>
+{% endaddtoblock %}

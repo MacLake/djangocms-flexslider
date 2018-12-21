@@ -1,0 +1,7 @@
+{% load cms_tags sekizai_tags %}
+    <li>
+	    <img src="{{ instance.image.url }}" />
+	    {% autoescape off %}
+	    <div class="flex-caption">{{ instance.caption }}</div>
+	    {% endautoescape %}
+    </li>

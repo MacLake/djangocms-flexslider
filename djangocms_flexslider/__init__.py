@@ -1,0 +1,1 @@
+name = "djangocms_flexslider"
